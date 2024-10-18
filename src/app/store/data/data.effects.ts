@@ -18,7 +18,7 @@ import {
   deleteListFail,
   insertList,
   insertListSuccess,
-  insertListFail, removeList, removeListSuccess, removeListFail, userData, userDataSuccess, userDataFail
+  insertListFail, removeList, removeListSuccess, removeListFail
 } from "./data.actions";
 
 @Injectable()
@@ -74,13 +74,4 @@ export class DataEffects {
       catchError((error) => of(removeListFail({error})))
     ))
   ))
-
-  $userData = createEffect(() => this.actions.pipe(
-    ofType(userData),
-    switchMap(() => this.service.userData().pipe(
-      map((data:any) => userDataSuccess({data})),
-      catchError((error) => of(userDataFail({error})))
-    ))
-  ))
-
 }

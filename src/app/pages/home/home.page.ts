@@ -14,21 +14,21 @@ import {tokenValidity} from "../../store/token/token.actions";
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy{
+export class HomePage implements OnInit, OnDestroy {
 
-  lists:any
-  private dataStateSubscription:Subscription;
-  private toast:ToastComponent;
+  lists: any
+  private dataStateSubscription: Subscription;
+  private toast: ToastComponent;
 
-  constructor(private store:Store<AppState>,toastController:ToastController, private router:Router) {
+  constructor(private store: Store<AppState>, toastController: ToastController, private router: Router) {
     this.store.dispatch(tokenValidity());
     this.toast = new ToastComponent(toastController)
     this.store.dispatch(readList());
   }
 
   ngOnInit(): void {
-    if(!this.dataStateSubscription){
-      this.dataStateSubscription = this.store.select('data').subscribe(state =>{
+    if (!this.dataStateSubscription) {
+      this.dataStateSubscription = this.store.select('data').subscribe(state => {
         this.onIsRead(state);
         this.onIsWritten(state);
         this.onIsDeleted(state);
@@ -39,53 +39,52 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if(this.dataStateSubscription){
+    if (this.dataStateSubscription) {
       this.dataStateSubscription.unsubscribe();
     }
   }
 
-  openList(id:number){
-    this.store.dispatch(getList({id:this.lists[id].id}));
+  openList(id: number) {
+    this.store.dispatch(getList({id: this.lists[id].id}));
   }
 
-  removeList(id:number){
-    this.store.dispatch(deleteList({id:this.lists[id].id}));
+  removeList(id: number) {
+    this.store.dispatch(deleteList({id: this.lists[id].id}));
   }
 
   insertList(modal: IonModal, datetime: IonDatetime) {
     datetime.confirm().then(() => {
       this.store.dispatch(writeList({datetime: <string>datetime.value}));
-      }
-    );
+    });
     modal.dismiss().catch((err) => this.toast.presentToast(err));
   }
 
   private onIsRead(state: DataState) {
-    if(state.isRead)
+    if (state.isRead)
       this.lists = state.data;
   }
 
   private onIsWritten(state: DataState) {
-    if(state.isWritten) {
+    if (state.isWritten) {
       this.toast.presentToast('Lista creata', "primary")
       this.store.dispatch(readList());
     }
   }
 
   private onIsDeleted(state: DataState) {
-    if(state.isDeleted) {
+    if (state.isDeleted) {
       this.toast.presentToast('Lista eliminata', 'primary')
       this.store.dispatch(readList());
     }
   }
 
   private onIsGot(state: DataState) {
-    if(state.isGot)
-      this.router.navigate(['list'], {'state':state.data}).catch((err) => this.toast.presentToast(err));
+    if (state.isGot)
+      this.router.navigate(['list'], {'state': state.data}).catch((err) => this.toast.presentToast(err));
   }
 
   private onError(state: DataState) {
-    if(state.error)
+    if (state.error)
       this.toast.presentToast(state.error)
   }
 }

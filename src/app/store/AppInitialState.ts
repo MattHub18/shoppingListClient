@@ -25,7 +25,6 @@ export const AppInitialState: AppState = {
     isWritten:false,
     isDeleted:false,
     isGot:false,
-    isUserData:false,
     data:null,
     error:null
   }

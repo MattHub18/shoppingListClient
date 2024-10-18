@@ -4,7 +4,6 @@ export interface DataState {
   isWritten:boolean;
   isDeleted:boolean;
   isGot:boolean;
-  isUserData:boolean;
   data:any;
   error:any;
 }

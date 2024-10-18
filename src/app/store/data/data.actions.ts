@@ -24,7 +24,3 @@ export const insertListFail = createAction("[insert] fail", props<{ error: any }
 export const removeList = createAction("[remove]", props<{ id:number }>());
 export const removeListSuccess = createAction("[remove] success");
 export const removeListFail = createAction("[remove] fail", props<{ error: any }>());
-
-export const userData = createAction("[user_data]");
-export const userDataSuccess = createAction("[user_data] success", props<{ data:any }>());
-export const userDataFail = createAction("[user_data] fail", props<{ error: any }>());

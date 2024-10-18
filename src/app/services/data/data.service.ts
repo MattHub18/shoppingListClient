@@ -137,24 +137,4 @@ export class DataService {
       });
     });
   }
-
-  userData(): Observable<any> {
-    return new Observable((observer) => {
-      let settings = {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: 'Bearer ' + this.authService.token.access
-        },
-        url: BASE_URL + 'api/v1/userdata/',
-        method: 'GET'
-      }
-      ajax(settings).then((response) => {
-        observer.next(response.data);
-        observer.complete();
-      }, (err) => {
-        observer.error(err);
-        observer.complete();
-      });
-    });
-  }
 }

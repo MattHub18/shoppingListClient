@@ -13,7 +13,7 @@ import {
   insertListSuccess,
   readList,
   readListFail,
-  readListSuccess, removeList, removeListFail, removeListSuccess, userData, userDataFail, userDataSuccess,
+  readListSuccess, removeList, removeListFail, removeListSuccess,
   writeList,
   writeListFail,
   writeListSuccess
@@ -38,7 +38,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: action.data,
       error: null
     };
@@ -50,7 +49,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };
@@ -68,7 +66,6 @@ const reducer = createReducer(
       isWritten: true,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: null
     };
@@ -80,7 +77,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };
@@ -98,7 +94,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: true,
       isGot: false,
-      isUserData: false,
       data: null,
       error: null
     };
@@ -110,7 +105,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };
@@ -128,7 +122,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: true,
-      isUserData: false,
       data: action.data,
       error: null
     };
@@ -140,7 +133,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };
@@ -158,7 +150,6 @@ const reducer = createReducer(
       isWritten: true,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: null
     };
@@ -170,7 +161,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };
@@ -188,7 +178,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: true,
       isGot: false,
-      isUserData: false,
       data: null,
       error: null
     };
@@ -200,37 +189,6 @@ const reducer = createReducer(
       isWritten: false,
       isDeleted: false,
       isGot: false,
-      isUserData: false,
-      data: null,
-      error: action.error
-    };
-  }),
-  on(userData, (currentState) => {
-    return {
-      ...currentState,
-      ...initialState,
-    };
-  }),
-  on(userDataSuccess, (currentState, action) => {
-    return {
-      ...currentState,
-      isRead: true,
-      isWritten: false,
-      isDeleted: false,
-      isGot: false,
-      isUserData: true,
-      data: action.data,
-      error: null
-    };
-  }),
-  on(userDataFail, (currentState, action) => {
-    return {
-      ...currentState,
-      isRead: false,
-      isWritten: false,
-      isDeleted: false,
-      isGot: false,
-      isUserData: false,
       data: null,
       error: action.error
     };

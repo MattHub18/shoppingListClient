@@ -1,0 +1,44 @@
+.row {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.isle{
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.name{
+  width: 75%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.iisle{
+  width: 33%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.iname{
+  width: 66%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.title{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sticky-bottom{
+  position: sticky;
+  bottom: 0;
+}
+
+ion-list{
+  height: 100%;
+}

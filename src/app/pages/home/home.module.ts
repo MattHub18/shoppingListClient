@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import {ToastModule} from "../../components/toast/toast.module";
+import {DatetimePipe} from "../../pipes/datetime/datetime.pipe";
 
 
 @NgModule({
@@ -12,8 +14,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    ToastModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, DatetimePipe]
 })
 export class HomePageModule {}

@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center card-title">La tua lista</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <div class="row">
+      <ion-label class="ion-text-center isle title">Corsia</ion-label>
+      <ion-label class="ion-text-center name title">Prodotto</ion-label>
+    </div>
+  </ion-item>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of list, index as id">
+      <ion-item>
+        <div class="row">
+          <ion-label class="ion-text-center isle">{{ item.isle }}</ion-label>
+          <ion-label class="ion-text-center name">{{ item.name }}</ion-label>
+        </div>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeItem(id)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    </ion-list>
+
+  <ion-item  lines="none"  class="sticky-bottom ion-padding-vertical">
+    <form [formGroup]="listForm">
+      <ion-item class="row">
+        <ion-input class="iisle" type="number" label="Corsia" labelPlacement="floating" formControlName="isle" fill="outline" min="1"></ion-input>
+        <ion-input class="iname" type="text" label="Prodotto" labelPlacement="floating" formControlName="item" fill="outline"></ion-input>
+      </ion-item>
+      <app-input-error-message [field]="listForm.get('isle')" message="Devi inserire la corsia del prodotto" error="required"></app-input-error-message>
+      <app-input-error-message [field]="listForm.get('item')" message="Devi inserire il nome del prodotto" error="required"></app-input-error-message>
+      <ion-button class="ion-padding" fill="solid" expand="full" [disabled]="!listForm.valid" (click)="insert()">Inserisci</ion-button>
+    </form>
+  </ion-item>
+</ion-content>

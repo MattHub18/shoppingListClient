@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <div class="flex-center">
+    <form [formGroup]="registerForm">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center card-title" color="primary">Register</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item>
+            <ion-input type="text" label="Username" labelPlacement="floating" formControlName="username" placeholder="Enter username"></ion-input>
+          </ion-item>
+          <app-input-error-message [field]="registerForm.get('username')" message="Username is mandatory!" error="required"></app-input-error-message>
+
+          <ion-item>
+            <ion-input type="password" label="Password" labelPlacement="floating" formControlName="password1" placeholder="Enter password"></ion-input>
+          </ion-item>
+          <app-input-error-message [field]="registerForm.get('password1')" message="Password is mandatory!" error="required"></app-input-error-message>
+
+          <ion-item>
+            <ion-input type="password" label="Confirm Password" labelPlacement="floating" formControlName="password2" placeholder="Confirm password"></ion-input>
+          </ion-item>
+          <app-input-error-message [field]="registerForm.get('password2')" message="Confirm password is mandatory!" error="required"></app-input-error-message>
+          <app-input-error-message [field]="registerForm.get('password2')" message="Password mismatch!" error="isNotMatching"></app-input-error-message>
+
+          <ion-button expand="full" [disabled]="!registerForm.valid" (click)="register()">Register</ion-button>
+
+          <p> Already registered? <a [routerLink]="['/login']" href="#">Login</a> </p>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>

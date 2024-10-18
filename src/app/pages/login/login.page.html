@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true">
+  <div class="flex-center">
+    <form [formGroup]="loginForm">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center card-title" color="primary">Login</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item>
+            <ion-input type="text" label="Username" labelPlacement="floating" formControlName="username" placeholder="Enter username"></ion-input>
+          </ion-item>
+          <app-input-error-message [field]="loginForm.get('username')" message="Username is mandatory!" error="required"></app-input-error-message>
+
+          <ion-item>
+            <ion-input type="password" label="Password" labelPlacement="floating" formControlName="password" placeholder="Enter password"></ion-input>
+          </ion-item>
+          <app-input-error-message [field]="loginForm.get('password')" message="Password is mandatory!" error="required"></app-input-error-message>
+
+          <ion-button expand="full" [disabled]="!loginForm.valid" (click)="login()">Login</ion-button>
+
+          <p> New user? <a [routerLink]="['/register']" href="#">Register</a> </p>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>
+

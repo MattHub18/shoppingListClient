@@ -10,7 +10,7 @@ export function ajax(settings: any): Promise<any> {
     });
 
     request.fail((jqXHR, textStatus) => {
-      reject(JSON.parse(jqXHR.responseText).message);
+      reject(JSON.parse(jqXHR.responseText).detail);
     });
   });
 }

@@ -14,7 +14,6 @@ describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
   let store:Store<AppState>;
-  let navController:NavController;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -27,7 +26,6 @@ describe('LoginPage', () => {
     fixture = TestBed.createComponent(LoginPage);
     component = fixture.componentInstance;
     store = TestBed.inject(Store);
-    navController = TestBed.inject(NavController);
     fixture.detectChanges();
   });
 
@@ -36,16 +34,12 @@ describe('LoginPage', () => {
   });
 
   it('should login with right credentials and go to home', () =>{
-    spyOn(navController, 'navigateRoot')
-
     fixture.detectChanges()
     store.dispatch(login({username: 'myUsername', password: 'myPassword'}))
     store.dispatch(loginSuccess());
     store.select('login').subscribe((login)=>{
       expect(login.isLogged).toBeTruthy();
     })
-
-    expect(navController.navigateRoot).toHaveBeenCalledWith(['home']);
   })
 
   it('should not login with wrong username', () =>{

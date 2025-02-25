@@ -12,12 +12,14 @@ const reducer = createReducer(
   on(login, (currentState) => {
     return {
       ...currentState,
-      ...initialState
+      ...initialState,
+      isLogging: true
     };
   }),
   on(loginSuccess, (currentState) => {
     return {
       ...currentState,
+      isLogging: false,
       isLogged: true,
       error:null
     };
@@ -25,6 +27,7 @@ const reducer = createReducer(
   on(loginFail, (currentState, action) => {
     return {
       ...currentState,
+      isLogging: false,
       isLogged: false,
       error:action.error
     };

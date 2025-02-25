@@ -4,14 +4,14 @@ import { Subscription } from 'rxjs';
 import { ToastComponent } from '../../components/toast/toast.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/AppState';
-import { NavController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { RegisterPageForm } from './form/register.page.form';
 
 import { register } from '../../store/register/register.actions';
-import { PreferenceState } from '../../store/preferences/PreferenceState';
 import { RegisterState } from '../../store/register/RegisterState';
 import { notification } from 'src/app/store/notification/notification.actions';
 import { NotificationState } from 'src/app/store/notification/NotificationState';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
 
 @Component({
   selector: 'app-register',
@@ -23,15 +23,18 @@ export class RegisterPage implements OnInit, OnDestroy {
   private registerStateSubscription: Subscription;
   private notificationStateSubscription: Subscription;
   private toast: ToastComponent;
+  private loader: LoaderComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private navController: NavController,
-    toastController: ToastController
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) {
     this.registerForm = new RegisterPageForm(this.formBuilder).createForm();
     this.toast = new ToastComponent(toastController);
+    this.loader = new LoaderComponent(loadingController);
   }
 
   ngOnInit() {
@@ -39,6 +42,7 @@ export class RegisterPage implements OnInit, OnDestroy {
       this.registerStateSubscription = this.store
         .select('register')
         .subscribe((state) => {
+          this.onIsRegistering(state);
           this.onIsRegistered(state);
           this.onError(state);
         });
@@ -64,11 +68,23 @@ export class RegisterPage implements OnInit, OnDestroy {
     console.log('register');
   }
 
+  private onIsRegistering(state: RegisterState) {
+    if (state.isRegistering)
+      this.loader.showLoader().catch((err) => {
+        this.toast.presentToast(err);
+      })
+  }
+
   private onIsRegistered(state: RegisterState) {
-    if (state.isRegistered)
+    if (state.isRegistered){
+      this.loader.hideLoader().catch((err) => {
+        this.toast.presentToast(err);
+      })
+
       this.navController.navigateRoot(['login']).catch((err) => {
         this.toast.presentToast(err);
       });
+    }
   }
 
   private onIsNotification(state: NotificationState) {
@@ -84,6 +100,12 @@ export class RegisterPage implements OnInit, OnDestroy {
   }
 
   private onError(state: RegisterState | NotificationState) {
-    if (state.error) this.toast.presentToast(state.error);
-  }
+      if (state.error){
+        this.loader.hideLoader().catch((err) => {
+          this.toast.presentToast(err);
+        });
+  
+        this.toast.presentToast(state.error);
+      } 
+    }
 }

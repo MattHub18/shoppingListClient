@@ -9,10 +9,12 @@ export const AppInitialState: AppState = {
     error:null,
   },
   login:{
+    isLogging:false,
     isLogged:false,
     error:null
   },
   register:{
+    isRegistering:false,
     isRegistered:false,
     error:null
   },

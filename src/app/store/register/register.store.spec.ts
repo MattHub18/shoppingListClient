@@ -12,12 +12,13 @@ describe('register store', ()=>{
 
   it('login', ()=>{
     const newState = registerReducer(initialState, register({username:"username", password1:"password", password2:"password", notificationId:"notificationId"}))
-    expect(newState).toEqual(initialState)
+    expect(newState).toEqual({...initialState, isRegistering:true})
   });
 
   it('register success', ()=>{
     const newState = registerReducer(initialState, registerSuccess())
     expect(newState).toEqual({
+      isRegistering:false,
       isRegistered:true,
       error:null
     });
@@ -26,6 +27,7 @@ describe('register store', ()=>{
   it('login fail', ()=>{
     const newState = registerReducer(initialState, registerFail({error:"error"}))
     expect(newState).toEqual({
+      isRegistering:false,
       isRegistered:false,
       error:"error"
     });

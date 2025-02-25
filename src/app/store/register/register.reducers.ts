@@ -12,12 +12,14 @@ const reducer = createReducer(
   on(register, (currentState) => {
     return {
       ...currentState,
-      ...initialState
+      ...initialState,
+      isRegistering: true,
     };
   }),
   on(registerSuccess, (currentState) => {
     return {
       ...currentState,
+      isRegistering: false,
       isRegistered: true,
       error:null
     };
@@ -25,6 +27,7 @@ const reducer = createReducer(
   on(registerFail, (currentState, action) => {
     return {
       ...currentState,
+      isRegistering: false,
       isRegistered: false,
       error:action.error
     };

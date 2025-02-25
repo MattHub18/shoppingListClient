@@ -12,12 +12,13 @@ describe('login store', ()=>{
 
   it('login', ()=>{
     const newState = loginReducer(initialState, login({username:"username", password:"password"}))
-    expect(newState).toEqual(initialState)
+    expect(newState).toEqual({...initialState, isLogging:true})
   });
 
   it('login success', ()=>{
     const newState = loginReducer(initialState, loginSuccess())
     expect(newState).toEqual({
+      isLogging:false,
       isLogged:true,
       error:null
     });
@@ -26,6 +27,7 @@ describe('login store', ()=>{
   it('login fail', ()=>{
     const newState = loginReducer(initialState, loginFail({error:"error"}))
     expect(newState).toEqual({
+      isLogging:false,
       isLogged:false,
       error:"error"
     });

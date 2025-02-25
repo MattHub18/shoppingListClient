@@ -9,6 +9,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import {ToastModule} from "../../components/toast/toast.module";
 import {InputErrorMessageModule} from "../../components/input-error-message/input-error-message.module";
+import { LoaderModule } from 'src/app/components/loader/loader.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {InputErrorMessageModule} from "../../components/input-error-message/inpu
     LoginPageRoutingModule,
     ReactiveFormsModule,
     InputErrorMessageModule,
-    ToastModule
+    ToastModule,
+    LoaderModule
   ],
   declarations: [LoginPage]
 })

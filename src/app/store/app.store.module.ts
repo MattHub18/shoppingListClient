@@ -10,6 +10,8 @@ import {DataEffects} from "./data/data.effects";
 import {dataReducer} from "./data/data.reducers";
 import {registerReducer} from "./register/register.reducers";
 import {RegisterEffects} from "./register/register.effects";
+import { notificationReducer } from "./notification/notification.reducers";
+import { NotificationEffects } from "./notification/notification.effects";
 
 /** add reducers and effects to app **/
 export const AppStoreModule = [
@@ -19,6 +21,7 @@ export const AppStoreModule = [
   StoreModule.forFeature('token', tokenReducer),
   StoreModule.forFeature('data', dataReducer),
   StoreModule.forFeature('register', registerReducer),
+  StoreModule.forFeature('notification', notificationReducer),
   EffectsModule.forRoot([]),
-  EffectsModule.forFeature(PreferenceEffects, LoginEffects, TokenEffects, DataEffects, RegisterEffects)
+  EffectsModule.forFeature(PreferenceEffects, LoginEffects, TokenEffects, DataEffects, RegisterEffects, NotificationEffects)
 ]

@@ -9,6 +9,7 @@ import { login } from 'src/app/store/login/login.actions';
 import { readPreference } from 'src/app/store/preferences/preference.actions';
 import { PreferenceState } from 'src/app/store/preferences/PreferenceState';
 import { PASSWORD_KEY, USERNAME_KEY } from 'src/app/util/constants';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-splash',
@@ -27,8 +28,21 @@ export class SplashPage implements OnInit, OnDestroy {
     this.toast = new ToastComponent(toastController);
   }
 
-  async ngOnInit() {
-    await SplashScreen.hide();
+  ngOnInit() {
+    SplashScreen.hide().then(() => {
+      PushNotifications.requestPermissions()
+        .then((result) => {
+          if (result.receive === 'granted') {
+            console.log('Permission granted for push notifications');
+            PushNotifications.register();
+          } else {
+            console.log('Permission denied for push notifications');
+          }
+        })
+        .catch((err) => {
+          this.toast.presentToast(err);
+        });
+    });
     SplashScreen.show({
       autoHide: false,
     }).then(() => {
@@ -69,10 +83,10 @@ export class SplashPage implements OnInit, OnDestroy {
       let password = passwordObj.value;
       if (username && password) {
         this.store.dispatch(login({ username: username, password: password }));
-      } else{
-        this.navController.navigateRoot(['login']).then(()=>{
+      } else {
+        this.navController.navigateRoot(['login']).then(() => {
           SplashScreen.hide();
-        })
+        });
       }
     }
   }

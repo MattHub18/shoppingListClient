@@ -27,5 +27,9 @@ export const AppInitialState: AppState = {
     isGot:false,
     data:null,
     error:null
+  },
+  notification:{
+    notificationId:null,
+    error:null
   }
 }

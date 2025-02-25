@@ -3,6 +3,7 @@ import {LoginState} from "./login/LoginState";
 import {TokenState} from "./token/TokenState";
 import {DataState} from "./data/DataState";
 import {RegisterState} from "./register/RegisterState";
+import { NotificationState } from "./notification/NotificationState";
 
 
 /** abstract app state **/
@@ -12,4 +13,5 @@ export interface AppState {
   token:TokenState;
   data:DataState;
   register: RegisterState;
+  notification: NotificationState;
 }

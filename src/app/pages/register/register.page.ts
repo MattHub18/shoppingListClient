@@ -65,7 +65,6 @@ export class RegisterPage implements OnInit, OnDestroy {
 
   register() {
     this.store.dispatch(notification());
-    console.log('register');
   }
 
   private onIsRegistering(state: RegisterState) {

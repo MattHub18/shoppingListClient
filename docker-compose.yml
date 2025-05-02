@@ -13,4 +13,4 @@ services:
     working_dir: /app
     environment:
       - CHOKIDAR_USEPOLLING=true  # Forza il watcher a polling (funziona bene su Docker)
-    command: bash -c "apt-get update && apt-get install -y git && npm install -g @ionic/cli && npm install && ionic serve --external --no-open --lab"
+    command: bash -c "apt-get update && apt-get install -y git && npm install -g @ionic/cli && npm instal @angular/cli && npm install && ionic serve --external --no-open --lab"

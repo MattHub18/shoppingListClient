@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  shopping-app:
+    image: node:18-slim  # Usa l'immagine base di Node.js
+    container_name: ionic-capacitor
+    ports:
+      - "8100:8100"  # Esponi la porta per il server di sviluppo
+    volumes:
+      - .:/app  # Monta la cartella del progetto nel container
+    working_dir: /app  # Cartella di lavoro
+    command: bash -c "npm install -g @ionic/cli && npm install && ionic serve --external"
+
+

@@ -1,16 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavController, ToastController} from "@ionic/angular";
+import {ToastController} from "@ionic/angular";
 import {AppState} from "./store/AppState";
 import {Store} from "@ngrx/store";
 import {ToastComponent} from "./components/toast/toast.component";
 import {Subscription} from "rxjs";
-import {readPreference} from "./store/preferences/preference.actions";
-import {PASSWORD_KEY, USERNAME_KEY} from "./util/constants";
 import {PreferenceState} from "./store/preferences/PreferenceState";
 import {LoginState} from "./store/login/LoginState";
 import {tokenValidity} from "./store/token/token.actions";
 import {TokenState} from "./store/token/TokenState";
-import {login} from "./store/login/login.actions";
 
 @Component({
   selector: 'app-root',
@@ -25,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.toast = new ToastComponent(toastController)
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (!this.tokenStateSubscription)
       this.tokenStateSubscription = this.store.select('token').subscribe(state => {
         this.checkTokenValidity(state);
@@ -33,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.tokenStateSubscription)
       this.tokenStateSubscription.unsubscribe();
   }

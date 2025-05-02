@@ -20,6 +20,7 @@ export class ListPage implements OnInit, OnDestroy {
   list:any;
   id:number;
   listForm: FormGroup;
+  checkedIds = new Set<number>();
   private dataStateSubscription:Subscription;
   private toast:ToastComponent;
 
@@ -52,6 +53,13 @@ export class ListPage implements OnInit, OnDestroy {
 
   insert() {
     this.store.dispatch(insertList({item:{isle:this.listForm.get('isle').value, name:this.listForm.get('item').value, shoppingListId:this.id}}));
+  }
+
+  checkItem(item: any, event: any) {
+    if (event.detail.checked)
+      this.checkedIds.add(item.id);
+    else
+      this.checkedIds.delete(item.id);
   }
 
   private onInserted(state: DataState) {

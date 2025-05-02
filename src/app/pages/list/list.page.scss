@@ -5,16 +5,16 @@
   width: 100%;
 }
 
+.action{
+  width: 25%;
+}
+
 .isle{
   width: 25%;
-  padding: 10px;
-  box-sizing: border-box;
 }
 
 .name{
-  width: 75%;
-  padding: 10px;
-  box-sizing: border-box;
+  width: 50%;
 }
 
 .iisle{
@@ -32,13 +32,32 @@
 .title{
   font-size: 1.2rem;
   font-weight: bold;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.sticky-bottom{
-  position: sticky;
-  bottom: 0;
+ion-checkbox {
+  margin: auto 0;
 }
 
-ion-list{
+.cross-out {
+  text-decoration: line-through;
+  text-decoration-color: #ff0000;
+  text-decoration-thickness: 5px;
+  opacity: 0.6;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+.scrollable-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.fixed {
+  flex-shrink: 0;
 }
